@@ -1,65 +1,66 @@
-🧪 OrangeHRM Automation Framework (Selenium + Java)
-📌 Project Overview
+🧪 OrangeHRM Automation Framework
+📌 Overview
 
-This project is a test automation framework built using Selenium WebDriver, designed to automate the OrangeHRM web application. It follows industry best practices like Page Object Model (POM) and supports scalable and maintainable test automation.
+This project is a Selenium-based test automation framework developed for automating the OrangeHRM web application. It is built using Java, TestNG, and Maven, following the Page Object Model (POM) design pattern to ensure scalability, maintainability, and reusability.
 
 🚀 Tech Stack
 Language: Java
 Automation Tool: Selenium WebDriver
-Build Tool: Maven
 Test Framework: TestNG
+Build Tool: Maven
 Design Pattern: Page Object Model (POM)
-Reporting: Extent Reports / TestNG Reports
+Reporting: TestNG Reports / Extent Reports
 Version Control: Git
 📂 Project Structure
 OrangeHRM-Automation/
-│── src/main/java
-│   ├── base/                # Base classes (Driver setup, utilities)
+│
+├── src/main/java
+│   ├── base/                # Driver setup & Base classes
 │   ├── pages/               # Page Object classes
-│   ├── utils/               # Reusable utilities
+│   ├── utilities/           # Reusable utility methods
 │
-│── src/test/java
-│   ├── tests/               # Test cases
-│   ├── testdata/            # Test data files (Excel/JSON)
+├── src/test/java
+│   ├── tests/               # Test classes
+│   ├── testdata/            # Test data files
 │
-│── resources/
+├── src/main/resources
 │   ├── config.properties    # Configuration file
-│   ├── testng.xml           # TestNG suite file
+│   ├── testng.xml           # Test suite file
 │
-│── reports/                 # Test reports
-│── screenshots/             # Failure screenshots
-│── pom.xml                  # Maven dependencies
-│── README.md                # Project documentation
-⚙️ Features Covered
-✅ Login Functionality
-✅ Dashboard Validation
-✅ Employee Management (PIM Module)
-✅ Admin Module Automation
-✅ Logout Functionality
-✅ Data-driven testing support
-✅ Cross-browser testing (Chrome, Edge, Firefox)
-🏗️ Framework Design
-🔹 Base Class
+├── reports/                 # Execution reports
+├── screenshots/             # Failure screenshots
+├── pom.xml                  # Maven dependencies
+└── README.md                # Documentation
+⚙️ Key Features
+Automated Login & Logout functionality
+Dashboard validation
+PIM (Employee Management) module automation
+Admin module automation
+Data-driven testing support
+Cross-browser testing capability
+Screenshot capture on failure
+🏗️ Framework Architecture
+🔹 Base Layer
 WebDriver initialization
-Browser handling
-Common setup/teardown
-🔹 Page Object Model (POM)
-
-Each page is implemented as a separate class:
-
-Locators → Private variables
-Initialization → Constructor
-Actions → Public methods
-
-Example:
-
+Browser configuration
+Setup & teardown methods
+🔹 Page Layer (POM)
+Separate classes for each page
+WebElements defined as private variables
+Public methods for user actions
+🔹 Test Layer
+Contains all TestNG test cases
+Uses assertions for validation
+🔹 Utility Layer
+Common reusable methods (Waits, Excel handling, etc.)
+🧪 Sample Page Object
 public class LoginPage {
 
     private WebDriver driver;
 
-    private By username = By.id("txtUsername");
-    private By password = By.id("txtPassword");
-    private By loginBtn = By.id("btnLogin");
+    private By username = By.name("username");
+    private By password = By.name("password");
+    private By loginBtn = By.xpath("//button[@type='submit']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -75,58 +76,44 @@ public class LoginPage {
 public class LoginTest extends BaseClass {
 
     @Test
-    public void validLoginTest() {
-        LoginPage login = new LoginPage(driver);
-        login.login("Admin", "admin123");
+    public void verifyValidLogin() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("Admin", "admin123");
 
-        Assert.assertTrue(driver.getTitle().contains("Dashboard"));
+        Assert.assertTrue(driver.getCurrentUrl().contains("dashboard"));
     }
 }
-▶️ How to Run the Project
+▶️ Execution Steps
 Prerequisites
-Java (JDK 8+)
+Java (JDK 8 or above)
 Maven installed
 IDE (IntelliJ / Eclipse)
-Chrome/Edge browser
-Steps
-Clone the repository:
-git clone https://github.com/your-repo/orangehrm-automation.git
-Navigate to project:
-cd orangehrm-automation
-Install dependencies:
-mvn clean install
-Run tests:
-mvn test
+Browser (Chrome/Edge)
+Run Tests
+mvn clean test
 ⚙️ Configuration
-
-Update config.properties:
-
+---
+Update values in config.properties:
+---
 browser=chrome
 url=https://opensource-demo.orangehrmlive.com
 username=Admin
 password=admin123
 📊 Reporting
-TestNG default reports → /test-output
-Extent Reports → /reports
-Screenshots captured on failure → /screenshots
-🔁 CI/CD Integration (Optional)
-Jenkins integration supported
-Can be scheduled for nightly runs
-Supports parallel execution
-📈 Best Practices Used
-✔ Page Object Model
-✔ Reusable utility methods
-✔ Data-driven testing
-✔ Proper exception handling
-✔ Clean and maintainable code
-🤝 Contribution
-Fork the repo
-Create a new branch
-Commit changes
-Create Pull Request
-📧 Contact
+TestNG reports → /test-output
+Extent reports → /reports
+Screenshots → /screenshots
+🔁 CI/CD Integration
+Can be integrated with Jenkins
+Supports scheduled execution
+Supports parallel execution via TestNG
+✅ Best Practices Implemented
+Page Object Model (POM)
+Reusable utilities
+Clean code structure
+Proper exception handling
+Data-driven approach
+👤 Author
 
-For queries or collaboration:
-
-Name: Yogesh
-Role: Automation Tester / Developer
+Yogesh
+Automation Tester / Software Developer
